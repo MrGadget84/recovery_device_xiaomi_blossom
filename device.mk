@@ -39,7 +39,9 @@ PRODUCT_VENDOR_PROPERTIES += \
 # HACK: Set vendor patch level
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bootimage.build.date.utc=0 \
-    ro.build.date.utc=0
+    ro.build.date.utc=0 \
+    ro.twrp.maintainer=MrGadget84 \
+    ro.build.user=MrGadget84
 
 # Kernel
 PRODUCT_COPY_FILES += \
