@@ -55,8 +55,8 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	# try to prevent potential data format errors
 	export OF_UNBIND_SDCARD_F2FS=1
 
-	# R11.1 Settings
-	export FOX_VERSION="R11.1"
+	# R12.1 Settings
+	export FOX_MAINTAINER_PATCH_VERSION="0"
 	export OF_MAINTAINER="MrGadget84"
 
 	# Screen Settings
