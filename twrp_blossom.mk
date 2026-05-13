@@ -17,6 +17,5 @@ $(call inherit-product, device/xiaomi/blossom/device.mk)
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := blossom
 PRODUCT_NAME := twrp_blossom
-PRODUCT_BRAND := Redmi
-PRODUCT_MODEL := Redmi Blossom
+PRODUCT_BRAND := xiaomi
 PRODUCT_MANUFACTURER := xiaomi

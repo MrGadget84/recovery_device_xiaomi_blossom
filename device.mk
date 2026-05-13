@@ -13,9 +13,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
 # API
 PRODUCT_SHIPPING_API_LEVEL := 29
 
-# Apex
-TW_EXCLUDE_APEX := true
-
 # Dynamic Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
@@ -36,13 +33,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_VENDOR_PROPERTIES += \
     ro.hardware.gatekeeper=beanpod
 
-# HACK: Set vendor patch level
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bootimage.build.date.utc=0 \
-    ro.build.date.utc=0 \
-    ro.twrp.maintainer=MrGadget84 \
-    ro.build.user=MrGadget84
-
 # Kernel
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/Image.gz:kernel
@@ -61,15 +51,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_VENDOR_PROPERTIES += \
     ro.hardware.kmsetkey=beanpod
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    keymaster_ver=4.0
-
-# Logging
-PRODUCT_VENDOR_PROPERTIES += \
-    ro.logd.kernel=false \
-    log.tag=I \
-    persist.log.tag=I
 
 # TEE
 PRODUCT_VENDOR_PROPERTIES += \

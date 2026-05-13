@@ -4,7 +4,7 @@ on init
 
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
 
-on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+on fs
     install_keyring
 
 on boot
@@ -32,23 +32,22 @@ on property:twrp.decrypt.done=true
     stop keymaster-4-0-beanpod
     stop gatekeeper-1-0
 
+service keystore_auth /system/bin/keystore_auth
+    oneshot
+    user system
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service keystore /system/bin/keystore /tmp/misc/keystore
+    user root
+    group root drmrpc readproc log
+    disabled
+    seclabel u:r:recovery:s0
+
 service keymaster-4-0-beanpod /vendor/bin/hw/android.hardware.keymaster@4.0-service.beanpod
-    interface android.hardware.keymaster@4.0::IKeymasterDevice default
     user root
     group root drmrpc
     disabled
     oneshot
     seclabel u:r:recovery:s0
-
-on boot
-    # disable some cpu cores
-    write /sys/bus/cpu/devices/cpu2/online 0
-    write /sys/bus/cpu/devices/cpu3/online 0
-    write /sys/bus/cpu/devices/cpu6/online 0
-    write /sys/bus/cpu/devices/cpu7/online 0
-
-    # kill bootprof
-    write /proc/bootprof "0"
-
-    # symlink toybox to vi
-    symlink /system/bin/toybox /system/bin/vi

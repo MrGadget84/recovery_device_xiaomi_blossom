@@ -14,17 +14,15 @@ TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := cortex-a53
+TARGET_CPU_VARIANT := generic
+TARGET_CPU_VARIANT_RUNTIME := cortex-a53
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv8-a
+TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a53
-
-# Asserts
-TARGET_OTA_ASSERT_DEVICE := blossom,dandelion,angelica,angelican,cattail,angelicain
-HA_TARGET_DEVICES := dandelion,angelica,angelican,cattail,angelicain,blossom
+TARGET_2ND_CPU_VARIANT := generic
+TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := blossom
@@ -38,13 +36,7 @@ BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 # Kernel
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=bootloader
-BOARD_KERNEL_CMDLINE += kpti=off
-BOARD_KERNEL_CMDLINE += quiet loglevel=3
-BOARD_KERNEL_CMDLINE += cgroup_disable=pressure
-BOARD_KERNEL_CMDLINE += cgroup.memory=nokmem,nosocket
-BOARD_KERNEL_CMDLINE += nodebugmon
-BOARD_KERNEL_CMDLINE += noirqdebug
+BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery
 
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
@@ -114,10 +106,6 @@ VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 PLATFORM_VERSION := 99.87.36
 PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 
-BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS += \
-    --prop com.android.build.boot.os_version:$(PLATFORM_VERSION) \
-    --prop com.android.build.boot.security_patch:$(PLATFORM_SECURITY_PATCH)
-
 # TWRP
 TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
@@ -132,28 +120,11 @@ TW_MAX_BRIGHTNESS := 2047
 TW_INCLUDE_NTFS_3G := true
 TARGET_USES_MKE2FS := true
 TW_INCLUDE_PYTHON := true
-TW_FRAMERATE := 60
-
-# TWRP (status bar items)
-ifneq ($(OF_HIDE_NOTCH),1)
-    TW_STATUS_ICONS_ALIGN := center
-    #TW_CUSTOM_CPU_POS := "300"
-    TW_CUSTOM_CLOCK_POS := "70"
-    TW_CUSTOM_BATTERY_POS := "900"
-endif
 
 # TWRP (Crypto)
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TW_PREPARE_DATA_MEDIA_EARLY := true
-TW_BIND_UMOUNT_BEFORE_FORMAT := true
-TW_USE_SIMPLIFIED_KEY_DIR_CHECK := true
-
-TW_SKIP_ADDITIONAL_FSTAB := true
-TW_FORCE_KEYMASTER_VER := true
-
-# HARP // crypto
-HA_FBE_SKIP_SDK := 29
 
 # TWRP (Debug)
 TWRP_INCLUDE_LOGCAT := true
@@ -168,6 +139,6 @@ BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA4096
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
 
-# TWRP Maintainer
-TW_MAINTAINER := MrGadget84
-
+# Extra OFOX flags
+OF_ENABLE_FRP_ADDON := 1
+OF_LOOP_DEVICE_ERRORS_TO_LOG := 1
