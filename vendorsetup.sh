@@ -108,8 +108,28 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 		export | grep "TARGET_" >> $FOX_BUILD_LOG_FILE
 		export | grep "TW_" >> $FOX_BUILD_LOG_FILE
 	fi
+	
+	export FOX_LOCAL_CALLBACK_SCRIPT="${BASH_SOURCE[0]}"
 else
 	if [ -z "$FOX_BUILD_DEVICE" -a -z "$BASH_SOURCE" ]; then
 		echo "I: This script requires bash. Not processing the $FDEVICE $(basename $0)"
 	fi
 fi
+
+function fox_local_callback() {
+	if [ "$2" = "--first-call" ]; then
+		local RAMDISK_PATH="$1"
+		local DEVICE_DIR=$(dirname "${BASH_SOURCE[0]}")
+		local MY_AVATAR="${DEVICE_DIR}/maintainer.png"
+		local TARGET_RES="${RAMDISK_PATH}/twres/images"
+
+		if [ -f "${MY_AVATAR}" ]; then
+			echo "I: [OrangeFox Customization]"
+			mkdir -p "${TARGET_RES}"
+			cp -f "${MY_AVATAR}" "${TARGET_RES}/author.png"
+			echo "I: [OrangeFox Customization]"
+		else
+			echo "W: [OrangeFox Customization]"
+		fi
+	fi
+}
