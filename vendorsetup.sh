@@ -56,7 +56,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export OF_UNBIND_SDCARD_F2FS=1
 
 # R12.1 Settings
-	export FOX_MAINTAINER_PATCH_VERSION="0"
+	export FOX_MAINTAINER_PATCH_VERSION="1"
 	export OF_MAINTAINER="MrGadget84"
 
 	# Screen Settings
