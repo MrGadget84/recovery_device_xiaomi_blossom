@@ -137,7 +137,7 @@ TW_FRAMERATE := 60
 # TWRP (status bar items)
 ifneq ($(OF_HIDE_NOTCH),1)
     TW_STATUS_ICONS_ALIGN := center
-    #TW_CUSTOM_CPU_POS := "300"
+    TW_CUSTOM_CPU_POS := "300"
     TW_CUSTOM_CLOCK_POS := "70"
     TW_CUSTOM_BATTERY_POS := "900"
 endif
