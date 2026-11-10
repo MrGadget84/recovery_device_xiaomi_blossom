@@ -7,4 +7,4 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/twrp_blossom.mk
 
 COMMON_LUNCH_CHOICES := \
-    twrp_blossom-eng
+    twrp_blossom-bp2a-eng
