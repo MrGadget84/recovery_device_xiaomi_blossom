@@ -47,4 +47,4 @@ PRODUCT_SYSTEM_PROPERTIES += \
 PRODUCT_TARGET_VNDK_VERSION := 30
 
 # AERA product configuration (UI, supported build options and packaging).
-$(call inherit-product, $(DEVICE_PATH)/aera_blossom.mk)
+$(call inherit-product, device/xiaomi/blossom/aera_blossom.mk)
